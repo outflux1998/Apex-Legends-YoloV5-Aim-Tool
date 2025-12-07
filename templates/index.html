@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atualizar Configurações</title>
+</head>
+<body>
+    <h1>Atualizar Configurações</h1>
+    <form id="settingsForm">
+        <label for="Kp">Kp:</label>
+        <input type="number" id="Kp" name="Kp" value="{{ Kp }}">
+        
+        <label for="Ki">Ki:</label>
+        <input type="number" id="Ki" name="Ki" value="{{ Ki }}">
+        
+        <label for="Kd">Kd:</label>
+        <input type="number" id="Kd" name="Kd" value="{{ Kd }}">
+        
+        <label for="max_step">Max Step:</label>
+        <input type="number" id="max_step" name="max_step" value="{{ max_step }}">
+
+        <label for="offset">Offset:</label>
+        <input type="number" id="offset" name="offset" value="{{ offset }}">
+
+        <label for="MOUSE_BUTTON_CODE">Ativador Aimbot:</label>
+        <select id="MOUSE_BUTTON_CODE" name="MOUSE_BUTTON_CODE">
+            <option value="5" {{ 'selected' if MOUSE_BUTTON_CODE == 5 else '' }}>Botao Lateral 2</option>
+            <option value="6" {{ 'selected' if MOUSE_BUTTON_CODE == 6 else '' }}>Botao Lateral 1</option>
+            <option value="1" {{ 'selected' if MOUSE_BUTTON_CODE == 1 else '' }}>Botao Esquerdo</option>
+            <option value="2" {{ 'selected' if MOUSE_BUTTON_CODE == 2 else '' }}>Botao Direito</option>
+            <!-- Add more options as needed -->
+        </select><br>
+
+        <label for="MOUSE_BUTTON_CODE2">Ativador Triggerbot:</label>
+        <select id="MOUSE_BUTTON_CODE2" name="MOUSE_BUTTON_CODE2">
+            <option value="5" {{ 'selected' if MOUSE_BUTTON_CODE2 == 5 else '' }}>Botao Lateral 2</option>
+            <option value="6" {{ 'selected' if MOUSE_BUTTON_CODE2 == 6 else '' }}>Botao Lateral 1</option>
+            <option value="1" {{ 'selected' if MOUSE_BUTTON_CODE2 == 1 else '' }}>Botao Esquerdo</option>
+            <option value="2" {{ 'selected' if MOUSE_BUTTON_CODE2 == 2 else '' }}>Botao Direito</option>
+            <!-- Add more options as needed -->
+        </select><br>
+
+        <button type="button" onclick="updateSettings()">Aplicar</button>
+    </form>
+
+    <script>
+        function updateSettings() {
+            var formData = {
+                Kp: document.getElementById('Kp').value,
+                Ki: document.getElementById('Ki').value,
+                Kd: document.getElementById('Kd').value,
+                max_step: document.getElementById('max_step').value,
+                offset: document.getElementById('offset').value,
+                MOUSE_BUTTON_CODE: document.getElementById('MOUSE_BUTTON_CODE').value,
+                MOUSE_BUTTON_CODE2: document.getElementById('MOUSE_BUTTON_CODE2').value
+            };
+
+            fetch('/update_settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+    </script>
+</body>
+</html>
