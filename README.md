@@ -116,4 +116,4 @@ This project is provided **strictly for educational and research purposes**, esp
 It is **not** intended for online gameplay, competitive use, or violation of any game’s terms of service.
 
 ---
-**Developed by Rafael Augusto**
+**Developed by Rafael Augusto 27/07/2023**
